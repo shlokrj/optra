@@ -74,16 +74,15 @@ export default function ImportClient() {
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-6">
       <div>
-        <h1 className="text-xl font-semibold text-zinc-100">Import from CSV</h1>
-        <p className="mt-1 text-sm text-zinc-500">
-          In Google Sheets: <span className="text-zinc-400">File → Download →
+        <h1 className="text-xl font-semibold text-slate-950">Import from CSV</h1>
+        <p className="mt-1 text-sm text-slate-600">
+          In Google Sheets: <span className="text-slate-500">File → Download →
           Comma Separated Values (.csv)</span>, then drop the file here. Extra
           rows above your header (titles, counters) are detected and skipped
           automatically.
         </p>
       </div>
 
-      {/* Drop zone */}
       <div
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
@@ -91,12 +90,12 @@ export default function ImportClient() {
           onFile(e.dataTransfer.files[0]);
         }}
         onClick={() => fileInput.current?.click()}
-        className="flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-700 bg-zinc-900/40 py-12 text-center transition-colors hover:border-indigo-500/60 hover:bg-zinc-900/70"
+        className="flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-12 text-center transition-colors hover:border-emerald-300 hover:bg-slate-100"
       >
-        <p className="text-sm font-medium text-zinc-300">
+        <p className="text-sm font-medium text-slate-900">
           {parsed ? parsed.fileName : "Drop a .csv file here, or click to browse"}
         </p>
-        <p className="mt-1 text-xs text-zinc-600">
+        <p className="mt-1 text-xs text-slate-500">
           {parsed
             ? `${parsed.dataRows.length} rows found — pick another file to start over`
             : "Your file never leaves this machine"}
@@ -110,26 +109,25 @@ export default function ImportClient() {
         />
       </div>
 
-      {error && <p className="text-sm text-rose-400">{error}</p>}
+      {error && <p className="text-sm text-rose-500">{error}</p>}
 
       {parsed && (
         <>
-          {/* Column mapping */}
-          <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">
-            <h2 className="text-sm font-semibold text-zinc-200">
+          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+            <h2 className="text-sm font-semibold text-slate-950">
               Column mapping
             </h2>
-            <p className="mt-0.5 text-xs text-zinc-500">
+            <p className="mt-0.5 text-xs text-slate-500">
               Auto-detected from your headers — adjust anything that looks off.
             </p>
             <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {parsed.headers.map((header, i) => (
                 <div
                   key={i}
-                  className="flex items-center justify-between gap-2 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2"
+                  className="flex items-center justify-between gap-2 rounded-md border border-slate-200 bg-slate-50 px-3 py-2"
                 >
                   <span
-                    className="truncate text-xs text-zinc-400"
+                    className="truncate text-xs text-slate-500"
                     title={header}
                   >
                     {header || `(column ${i + 1})`}
@@ -142,7 +140,7 @@ export default function ImportClient() {
                         [i]: e.target.value as ImportFieldKey,
                       }))
                     }
-                    className="rounded border border-zinc-700 bg-zinc-800 px-1.5 py-1 text-xs text-zinc-200 focus:outline-none"
+                    className="rounded border border-slate-200 bg-white px-1.5 py-1 text-xs text-slate-900 focus:outline-none"
                   >
                     {IMPORT_FIELDS.map((f) => (
                       <option key={f.key} value={f.key}>
@@ -155,16 +153,15 @@ export default function ImportClient() {
             </div>
           </div>
 
-          {/* Preview */}
-          <div className="rounded-xl border border-zinc-800">
-            <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3">
-              <h2 className="text-sm font-semibold text-zinc-200">
+          <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
+              <h2 className="text-sm font-semibold text-slate-950">
                 Preview — {preview.length} applications
               </h2>
               <button
                 onClick={runImport}
                 disabled={pending || preview.length === 0 || done !== null}
-                className="rounded-md bg-indigo-500 px-4 py-1.5 text-sm font-medium text-white hover:bg-indigo-400 disabled:opacity-50"
+                className="rounded-md bg-emerald-500 px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-emerald-400 disabled:opacity-50"
               >
                 {done !== null
                   ? `Imported ${done} ✓`
@@ -175,7 +172,7 @@ export default function ImportClient() {
             </div>
             <div className="max-h-96 overflow-auto">
               <table className="w-full text-sm">
-                <thead className="sticky top-0 bg-zinc-900 text-left text-xs text-zinc-500">
+                <thead className="sticky top-0 bg-slate-50 text-left text-xs text-slate-500">
                   <tr>
                     <th className="px-4 py-2 font-medium">Company</th>
                     <th className="px-4 py-2 font-medium">Role</th>
@@ -187,21 +184,18 @@ export default function ImportClient() {
                 </thead>
                 <tbody>
                   {preview.map((row, i) => (
-                    <tr
-                      key={i}
-                      className="border-t border-zinc-800/60 text-zinc-300"
-                    >
-                      <td className="px-4 py-2 font-medium text-zinc-100">
+                    <tr key={i} className="border-t border-slate-200/60 text-slate-700">
+                      <td className="px-4 py-2 font-medium text-slate-950">
                         {row.company}
                       </td>
                       <td className="px-4 py-2">{row.role}</td>
-                      <td className="px-4 py-2 text-zinc-400">
+                      <td className="px-4 py-2 text-slate-500">
                         {row.season || "—"}
                       </td>
-                      <td className="px-4 py-2 text-zinc-400">
+                      <td className="px-4 py-2 text-slate-500">
                         {row.category}
                       </td>
-                      <td className="px-4 py-2 whitespace-nowrap text-zinc-400">
+                      <td className="px-4 py-2 whitespace-nowrap text-slate-500">
                         {formatDate(row.dateApplied)}
                       </td>
                       <td className="px-4 py-2">
@@ -213,7 +207,7 @@ export default function ImportClient() {
                     <tr>
                       <td
                         colSpan={6}
-                        className="px-4 py-8 text-center text-zinc-500"
+                        className="px-4 py-8 text-center text-slate-500"
                       >
                         No importable rows — make sure a column is mapped to
                         Company.

@@ -58,8 +58,8 @@ function inputFrom(app: Application): ApplicationInput {
 }
 
 const inputClass =
-  "w-full rounded-md border border-zinc-700/80 bg-zinc-900 px-3 py-1.5 text-sm text-zinc-200 " +
-  "placeholder:text-zinc-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/50";
+  "w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-900 " +
+  "placeholder:text-slate-400 focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-200";
 
 function Field({
   label,
@@ -72,7 +72,7 @@ function Field({
 }) {
   return (
     <label className={`flex flex-col gap-1 ${span ? "sm:col-span-2" : ""}`}>
-      <span className="text-xs font-medium text-zinc-400">{label}</span>
+      <span className="text-xs font-medium text-slate-500">{label}</span>
       {children}
     </label>
   );
@@ -120,21 +120,21 @@ export default function ApplicationModal({ app, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm sm:py-12"
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/40 p-4 backdrop-blur-sm sm:py-12"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="w-full max-w-2xl rounded-xl border border-zinc-800 bg-zinc-900 shadow-2xl">
+      <div className="w-full max-w-2xl rounded-xl border border-slate-200 bg-white shadow-2xl">
         <form onSubmit={submit}>
-          <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-4">
-            <h2 className="text-base font-semibold text-zinc-100">
+          <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+            <h2 className="text-base font-semibold text-slate-950">
               {app ? "Edit application" : "New application"}
             </h2>
             <button
               type="button"
               onClick={onClose}
-              className="rounded-md p-1 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300"
+              className="rounded-md p-1 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
               aria-label="Close"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -275,9 +275,9 @@ export default function ApplicationModal({ app, onClose }: Props) {
                 type="checkbox"
                 checked={form.referral}
                 onChange={(e) => set("referral", e.target.checked)}
-                className="h-4 w-4 rounded border-zinc-700 bg-zinc-900 accent-indigo-500"
+                className="h-4 w-4 rounded border-slate-300 bg-white accent-emerald-500"
               />
-              <span className="text-sm text-zinc-300">I have a referral</span>
+              <span className="text-sm text-slate-600">I have a referral</span>
             </label>
 
             <Field label="Notes" span>
@@ -291,17 +291,17 @@ export default function ApplicationModal({ app, onClose }: Props) {
           </div>
 
           {error && (
-            <p className="px-5 pb-2 text-sm text-rose-400">{error}</p>
+            <p className="px-5 pb-2 text-sm text-rose-500">{error}</p>
           )}
 
-          <div className="flex items-center justify-between border-t border-zinc-800 px-5 py-4">
+          <div className="flex items-center justify-between border-t border-slate-200 px-5 py-4">
             <div>
               {app && (
                 <button
                   type="button"
                   onClick={remove}
                   disabled={pending}
-                  className="rounded-md px-3 py-1.5 text-sm text-rose-400 hover:bg-rose-500/10 disabled:opacity-50"
+                  className="rounded-md px-3 py-1.5 text-sm text-rose-600 hover:bg-rose-100 disabled:opacity-50"
                 >
                   Delete
                 </button>
@@ -311,14 +311,14 @@ export default function ApplicationModal({ app, onClose }: Props) {
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-md px-3 py-1.5 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
+                className="rounded-md px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-950"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={pending}
-                className="rounded-md bg-indigo-500 px-4 py-1.5 text-sm font-medium text-white hover:bg-indigo-400 disabled:opacity-50"
+                className="rounded-md bg-emerald-500 px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-emerald-400 disabled:opacity-50"
               >
                 {pending ? "Saving…" : app ? "Save changes" : "Add application"}
               </button>

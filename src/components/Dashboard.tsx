@@ -30,9 +30,9 @@ function StatCard({
   accent?: string;
 }) {
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3">
-      <p className="text-xs font-medium text-zinc-500">{label}</p>
-      <p className={`mt-1 text-2xl font-semibold ${accent ?? "text-zinc-100"}`}>
+    <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+      <p className="text-xs font-medium text-slate-500">{label}</p>
+      <p className={`mt-1 text-2xl font-semibold ${accent ?? "text-slate-950"}`}>
         {value}
       </p>
     </div>
@@ -124,7 +124,6 @@ export default function Dashboard({ apps }: Props) {
       if (sortKey === "company") {
         cmp = a.company.localeCompare(b.company);
       } else {
-        // ISO date strings (or empty, which sorts last)
         const av = a[sortKey] || (sortDir === "asc" ? "￿" : "");
         const bv = b[sortKey] || (sortDir === "asc" ? "￿" : "");
         cmp = av.localeCompare(bv);
@@ -154,29 +153,29 @@ export default function Dashboard({ apps }: Props) {
   };
 
   const selectClass =
-    "rounded-md border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-sm text-zinc-300 " +
-    "focus:border-indigo-500 focus:outline-none";
+    "rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1.5 text-sm text-slate-900 " +
+    "focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-200";
 
   if (apps.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-800 py-24 text-center">
-        <h1 className="text-xl font-semibold text-zinc-100">
+      <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white py-24 text-center shadow-sm">
+        <h1 className="text-xl font-semibold text-slate-950">
           No applications yet
         </h1>
-        <p className="mt-2 max-w-md text-sm text-zinc-500">
+        <p className="mt-2 max-w-md text-sm text-slate-500">
           Add your first opportunity, or import everything from your existing
           spreadsheet to get going in one shot.
         </p>
         <div className="mt-6 flex gap-3">
           <button
             onClick={() => setModal({ app: null })}
-            className="rounded-md bg-indigo-500 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-400"
+            className="rounded-md bg-emerald-500 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-emerald-400"
           >
             + Add application
           </button>
           <Link
             href="/import"
-            className="rounded-md border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-300 hover:bg-zinc-900"
+            className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
           >
             Import from CSV
           </Link>
@@ -190,25 +189,23 @@ export default function Dashboard({ apps }: Props) {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Stats */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
         <StatCard label="Total tracked" value={stats.total} />
-        <StatCard label="Active pipeline" value={stats.active} accent="text-sky-400" />
-        <StatCard label="Offers" value={stats.offers} accent="text-emerald-400" />
-        <StatCard label="Rejected" value={stats.rejected} accent="text-rose-400" />
+        <StatCard label="Active pipeline" value={stats.active} accent="text-emerald-600" />
+        <StatCard label="Offers" value={stats.offers} accent="text-emerald-600" />
+        <StatCard label="Rejected" value={stats.rejected} accent="text-rose-500" />
         <StatCard
           label="Response rate"
           value={stats.responseRate === null ? "—" : `${stats.responseRate}%`}
         />
       </div>
 
-      {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-2">
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search company, role, notes…"
-          className="w-full max-w-xs rounded-md border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-sm text-zinc-200 placeholder:text-zinc-600 focus:border-indigo-500 focus:outline-none"
+          className="w-full max-w-xs rounded-md border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-200"
         />
         <select
           value={seasonFilter}
@@ -237,14 +234,13 @@ export default function Dashboard({ apps }: Props) {
         <div className="ml-auto">
           <button
             onClick={() => setModal({ app: null })}
-            className="rounded-md bg-indigo-500 px-4 py-1.5 text-sm font-medium text-white hover:bg-indigo-400"
+            className="rounded-md bg-emerald-500 px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-emerald-400 shadow-sm"
           >
             + Add application
           </button>
         </div>
       </div>
 
-      {/* Status filter pills */}
       <div className="flex flex-wrap gap-1.5">
         {(
           [
@@ -257,8 +253,8 @@ export default function Dashboard({ apps }: Props) {
             onClick={() => setStatusFilter(key)}
             className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
               statusFilter === key
-                ? "border-indigo-500/50 bg-indigo-500/15 text-indigo-300"
-                : "border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200"
+                ? "border-emerald-400/50 bg-emerald-50 text-emerald-700"
+                : "border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-950"
             }`}
           >
             {label}
@@ -275,7 +271,7 @@ export default function Dashboard({ apps }: Props) {
               className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
                 active
                   ? STATUS_STYLES[s].badge
-                  : "border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200"
+                  : "border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-950"
               }`}
             >
               {STATUS_SHORT_LABELS[s]} · {count}
@@ -284,13 +280,12 @@ export default function Dashboard({ apps }: Props) {
         })}
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto rounded-xl border border-zinc-800">
+      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
         <table className="w-full min-w-175 text-sm">
           <thead>
-            <tr className="border-b border-zinc-800 bg-zinc-900/60 text-left text-xs text-zinc-500">
+            <tr className="border-b border-slate-200 bg-slate-50 text-left text-xs text-slate-500">
               <th
-                className="cursor-pointer select-none px-4 py-2.5 font-medium hover:text-zinc-300"
+                className="cursor-pointer select-none px-4 py-2.5 font-medium hover:text-slate-950"
                 onClick={() => toggleSort("company")}
               >
                 Company{sortIndicator("company")}
@@ -298,7 +293,7 @@ export default function Dashboard({ apps }: Props) {
               <th className="px-4 py-2.5 font-medium">Role</th>
               <th className="px-4 py-2.5 font-medium">Season</th>
               <th
-                className="cursor-pointer select-none px-4 py-2.5 font-medium hover:text-zinc-300"
+                className="cursor-pointer select-none px-4 py-2.5 font-medium hover:text-slate-950"
                 onClick={() => toggleSort("dateApplied")}
               >
                 Applied{sortIndicator("dateApplied")}
@@ -314,31 +309,31 @@ export default function Dashboard({ apps }: Props) {
                 <tr
                   key={app.id}
                   onClick={() => setModal({ app })}
-                  className="cursor-pointer border-b border-zinc-800/60 last:border-0 hover:bg-zinc-900/50"
+                  className="cursor-pointer border-b border-slate-200 last:border-0 hover:bg-slate-50"
                 >
                   <td className="px-4 py-3">
-                    <span className="font-medium text-zinc-100">
+                    <span className="font-medium text-slate-950">
                       {app.company}
                     </span>
                     {app.referral && (
                       <span
                         title="Referral"
-                        className="ml-1.5 text-xs text-amber-400"
+                        className="ml-1.5 text-xs text-emerald-600"
                       >
                         ★
                       </span>
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <div className="text-zinc-300">{app.role}</div>
-                    <div className="mt-0.5 text-xs text-zinc-600">
+                    <div className="text-slate-700">{app.role}</div>
+                    <div className="mt-0.5 text-xs text-slate-500">
                       {[app.category, app.location].filter(Boolean).join(" · ")}
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-zinc-400">
+                  <td className="px-4 py-3 text-slate-500">
                     {app.season || "—"}
                   </td>
-                  <td className="px-4 py-3 whitespace-nowrap text-zinc-400">
+                  <td className="px-4 py-3 whitespace-nowrap text-slate-500">
                     {formatDate(app.dateApplied)}
                   </td>
                   <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
@@ -347,24 +342,24 @@ export default function Dashboard({ apps }: Props) {
                       onChange={(e) =>
                         changeStatus(app.id, e.target.value as Status)
                       }
-                      className={`cursor-pointer appearance-none rounded-full border px-2.5 py-1 text-xs font-medium focus:outline-none ${style?.badge ?? ""}`}
+                      className={`cursor-pointer appearance-none rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-900 focus:outline-none ${style?.badge ?? ""}`}
                     >
                       {STATUSES.map((s) => (
-                        <option key={s} value={s} className="bg-zinc-900 text-zinc-200">
+                        <option key={s} value={s} className="bg-white text-slate-900">
                           {STATUS_LABELS[s]}
                         </option>
                       ))}
                     </select>
                   </td>
                   <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex items-center gap-2 text-zinc-500">
+                    <div className="flex items-center gap-2 text-slate-500">
                       {isHttpUrl(app.url) && (
                         <a
                           href={app.url}
                           target="_blank"
                           rel="noreferrer"
                           title="Job posting"
-                          className="hover:text-indigo-400"
+                          className="hover:text-emerald-600"
                         >
                           <ExternalIcon />
                         </a>
@@ -375,7 +370,7 @@ export default function Dashboard({ apps }: Props) {
                           target="_blank"
                           rel="noreferrer"
                           title="Applicant portal"
-                          className="hover:text-emerald-400"
+                          className="hover:text-emerald-600"
                         >
                           <ExternalIcon />
                         </a>
@@ -390,7 +385,7 @@ export default function Dashboard({ apps }: Props) {
               <tr>
                 <td
                   colSpan={6}
-                  className="px-4 py-10 text-center text-sm text-zinc-500"
+                  className="px-4 py-10 text-center text-sm text-slate-500"
                 >
                   Nothing matches the current filters.
                 </td>
@@ -400,7 +395,7 @@ export default function Dashboard({ apps }: Props) {
         </table>
       </div>
 
-      <p className="text-xs text-zinc-600">
+      <p className="text-xs text-slate-500">
         {filtered.length} of {apps.length} applications shown · click a row to
         edit
       </p>

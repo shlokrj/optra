@@ -30,36 +30,36 @@ export const STATUS_SHORT_LABELS: Record<Status, string> = {
 // Badge + accent styling per status (Tailwind classes).
 export const STATUS_STYLES: Record<Status, { badge: string; dot: string }> = {
   saved: {
-    badge: "bg-zinc-500/10 text-zinc-400 border-zinc-500/20",
-    dot: "bg-zinc-400",
+    badge: "bg-slate-200/80 text-slate-700 border-slate-200",
+    dot: "bg-slate-500",
   },
   applied: {
-    badge: "bg-sky-500/10 text-sky-400 border-sky-500/20",
-    dot: "bg-sky-400",
+    badge: "bg-emerald-100 text-emerald-700 border-emerald-200",
+    dot: "bg-emerald-500",
   },
   oa: {
-    badge: "bg-violet-500/10 text-violet-400 border-violet-500/20",
-    dot: "bg-violet-400",
+    badge: "bg-cyan-100 text-cyan-700 border-cyan-200",
+    dot: "bg-cyan-500",
   },
   interviewing: {
-    badge: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-    dot: "bg-amber-400",
+    badge: "bg-amber-100 text-amber-700 border-amber-200",
+    dot: "bg-amber-500",
   },
   offer: {
-    badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-    dot: "bg-emerald-400",
+    badge: "bg-emerald-100 text-emerald-700 border-emerald-200",
+    dot: "bg-emerald-500",
   },
   rejected: {
-    badge: "bg-rose-500/10 text-rose-400 border-rose-500/20",
-    dot: "bg-rose-400",
+    badge: "bg-rose-100 text-rose-700 border-rose-200",
+    dot: "bg-rose-500",
   },
   ghosted: {
-    badge: "bg-stone-500/10 text-stone-400 border-stone-500/20",
-    dot: "bg-stone-400",
+    badge: "bg-slate-100 text-slate-700 border-slate-200",
+    dot: "bg-slate-500",
   },
   withdrawn: {
-    badge: "bg-zinc-500/10 text-zinc-500 border-zinc-500/20",
-    dot: "bg-zinc-500",
+    badge: "bg-slate-200/80 text-slate-700 border-slate-200",
+    dot: "bg-slate-500",
   },
 };
 
